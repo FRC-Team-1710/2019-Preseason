@@ -220,5 +220,23 @@ public class Drive {
 
 	public static void autoShift(double leftVelocity, double shiftLowThreshold, double shiftHighThreshold) {
 	}
+	public static void slowing() {
+		double oldVelocity= RobotMap.R1.getMotorOutputPercent();
+		double targetVelocity= ControllerMap.getForwardPower();
+		double rateOfChange = .005;
+		double newVelocityAdd = (rateOfChange + oldVelocity);
+		double newVelocitySub = (rateOfChange - oldVelocity);
+
+		if (targetVelocity - rateOfChange < oldVelocity && oldVelocity < targetVelocity + rateOfChange) {
+			RobotMap.R1.set(ControlMode.PercentOutput, targetVelocity);
+			RobotMap.L1.set(ControlMode.PercentOutput, targetVelocity);
+		} else if (oldVelocity> targetVelocity) {
+			RobotMap.R1.set(ControlMode.PercentOutput, newVelocitySub);
+			RobotMap.L1.set(ControlMode.PercentOutput, newVelocitySub);
+		} else if (oldVelocity< targetVelocity) {
+			RobotMap.R1.set(ControlMode.PercentOutput, newVelocityAdd);
+			RobotMap.L1.set(ControlMode.PercentOutput, newVelocityAdd);
+		} 
 	
+	}
 }
