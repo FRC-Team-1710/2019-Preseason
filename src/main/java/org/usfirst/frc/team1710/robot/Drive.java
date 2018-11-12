@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
+
 // Hello friends.
 
 public class Drive {
@@ -48,7 +50,7 @@ public class Drive {
 	public static void setShifters(boolean isShifted) {
 		if(isShifted == true) {
 			RobotMap.shifter.set(Value.kReverse);
-		}else {
+		} else {
 			RobotMap.shifter.set(Value.kForward);
 		}
 	}
@@ -90,6 +92,20 @@ public class Drive {
 			setShifters(false);
 		}
 	}*/
+
+	public static float Approach(float goal, float current, float dt){
+		float difference = goal - current;
+
+		if(difference > dt){
+			return current + dt;
+		}
+		else if(difference < -dt){
+			return current - dt;
+		}		
+		else{
+			return current;
+		}
+	}
 	public static double getMetersPerSecToFtPerSec(double meters){
 		return ftPerSec(meters)/60;
 	}
