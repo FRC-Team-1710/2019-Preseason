@@ -22,6 +22,9 @@ public class Drive {
 	static boolean navxReset = false;
 	static double setPoint;
 	static double lastAngle, angleIntegral, output;
+	public static double dDt;
+	public static double dGoal;
+	public static double dCurrent;
 
 	public static void initializeDrive () {
 		RobotMap.R1 = new TalonSRX (Constants.rightLeaderid);
@@ -93,8 +96,11 @@ public class Drive {
 		}
 	}*/
 
-	public static float Approach(float goal, float current, float dt){
-		float difference = goal - current;
+	public static double Approach(double goal, double current, double dt){
+		 dDt = dt;
+		dGoal = goal;
+		dCurrent = current;
+		double difference = goal - current;
 
 		if(difference > dt){
 			return current + dt;

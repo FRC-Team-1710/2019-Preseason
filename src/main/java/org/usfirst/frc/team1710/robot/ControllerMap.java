@@ -65,7 +65,8 @@ public class ControllerMap {
 		return -RobotMap.driveStick.getRawAxis(4);
 	}
 	public static double getForwardPower() {
-		return RobotMap.driveStick.getRawAxis(1);   //1
+		Drive.dGoal = RobotMap.driveStick.getRawAxis(1) * //Robot velocity goal, multiply by max velocity of the robot; 
+		return Drive.Approach(Drive.dGoal, //get the robots current velocity, dGoal / 75);
 	}
 	public static double liftPower() {
 		if(Math.abs(RobotMap.mechStick.getRawAxis(1)) >= 0.25) {
