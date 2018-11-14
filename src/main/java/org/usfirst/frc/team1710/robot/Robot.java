@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
@@ -155,7 +156,7 @@ public class Robot extends IterativeRobot {
 			} else if( ControllerMap.intakeR() > .4) {
 				Drive.arcadeDrive(ControllerMap.getTurnPower() * .7, ControllerMap.getForwardPower() * .7, false);
 			} else {
-				Drive.arcadeDrive(ControllerMap.getTurnPower(), ControllerMap.getForwardPower(), ControllerMap.shift());
+				Drive.arcadeDrive(ControllerMap.getTurnPower(), ControllerMap.getForwardPower(), true);
 			}
 			Intake.intake(ControllerMap.intakeR()*.85, ControllerMap.intakeL()*.75);
 		}
@@ -187,8 +188,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Robot Heading", Drive.getNavxAngle());
 		SmartDashboard.putNumber("Controller Pov", RobotMap.driveStick.getPOV());
 		SmartDashboard.putBoolean("Cube in", Intake.isCubeInIntake());
-		SmartDashboard.putNumber("Robot Velocity", Drive.getFBVelocity());
-		SmartDashboard.putNumber("Robot Velocity", Drive.getLRVelocity());
+		//SmartDashboard.putNumber("Robot Velocity NavX", Drive.getFBVelocity());
+		//SmartDashboard.putNumber("Robot Velocity NavX", Drive.getLRVelocity());
+		SmartDashboard.putNumber("Robot Velo Navx X", RobotMap.navx.getVelocityX());
+		SmartDashboard.putNumber("Robot Velo Navx Y", RobotMap.navx.getVelocityY());
+		SmartDashboard.putNumber("Robot Velo Navx Z", RobotMap.navx.getVelocityZ());
+		SmartDashboard.putBoolean("Auto Shift", RobotMap.shifter.get() == Value.kForward);
 		Drive.autoShift(Drive.getLeftVelocity(), Constants.shiftLowThreshold, Constants.shiftHighThreshold);
 
 		if(lift.isAtBottom() == true) {

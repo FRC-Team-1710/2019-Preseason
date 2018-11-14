@@ -89,36 +89,56 @@ public class Drive {
 		}else if( getLeftVelocity() < lowThreshold) {
 			setShifters(false);
 		}
-	}*/
+	}
 	public static double getMetersPerSecToFtPerSec(double meters){
-		return ftPerSec(meters)/60;
+		return ftPerSec(meters/2.54)/12;
 	}
 	private static double ftPerSec(double meters) {
 		return 0;
-	}
-	public static double getLRVelocity(){ //get Left Right Velocity
-		return getMetersPerSecToFtPerSec(RobotMap.navx.getVelocityX());
-	}
+	} */
+	
+	//public static double getLRVelocity(){ //get Left Right Velocity
+		//return ((RobotMap.navx.getVelocityX()*100)/2.54)/12;
+		//getMetersPerSecToFtPerSec(RobotMap.navx.getVelocityX());
+	//}
 	public static double getFBVelocity(){ //get forward backward velocity
-		return getMetersPerSecToFtPerSec(RobotMap.navx.getVelocityY());
-	}
+		return RobotMap.navx.getVelocityY();
+		//getMetersPerSecToFtPerSec(RobotMap.navx.getVelocityY());
+	} 
 	public static void arcadeDrive (double side, double forward, boolean shift) {
 		if (shift == true) {
-			if(navxReset == false) {
-				RobotMap.navx.reset();
-				navxReset = true;
-			}
+			// if(navxReset == false) {
+			// 	RobotMap.navx.reset();
+			// 	navxReset = true;
+			//}
+			double forwardVelocity = Math.abs(getFBVelocity());
+			// if (forwardVelocity > Constants.shiftHighThreshold){
+				setShifters(true);
+			// } else if (forwardVelocity < Constants.shiftLowThreshold){
+			// 	setShifters(false);
+			// }
+			// 	//public static double shiftHighThreshold = 1400;
+			/*
+			check robot velocity
+			if greater than threshold
+			-> shift high gear
+			if lower than threshold
+			-> stay in low gear
+			*/
 			//high gear
-			setShifters(true);
+			//setShifters(true);
 			//side is forward for some reason
+			// public static boolean autoShift(){
+			// 	if(Constants.shiftLowThreshold < r)
+			// }
 			RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
 			RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
 		} else {
 			RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
 			RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
 			//low gear
-			setShifters(false);
-			navxReset = false;
+			//setShifters(false);
+			//navxReset = false;
 		}
 		
 	}
