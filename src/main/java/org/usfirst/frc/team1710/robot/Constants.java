@@ -127,6 +127,7 @@ public class Constants {
 	public static double ultraSonicInIntake = 235;
 	public static double slowDownPercent = 0.1;
 
-	
+	public static double maxSpeedHigh = 19.81;
+	public static double maxSpeedLow = 5.39;
 	
 }
