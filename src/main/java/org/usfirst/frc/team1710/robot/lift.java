@@ -93,7 +93,7 @@ public class lift {
 			//if the stick is moving up and the lift isn't near the top
 			} else if(ControllerMap.liftPower() <= 0 && isAtTop() == false) {
 				RobotMap.lift1.set(ControlMode.PercentOutput, ControllerMap.liftPower() * .8);	
-				System.out.println("upsies");
+				//System.out.println("upsies");
 			}
 			setPoint = getLiftEncPosition();
 		} else {	

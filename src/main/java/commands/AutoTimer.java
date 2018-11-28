@@ -31,7 +31,7 @@ public class AutoTimer extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Auto completed in: " + Robot.autoTime.get());
+    	//System.out.println("Auto completed in: " + Robot.autoTime.get());
     }
 
     // Called when another command which requires one or more of the same

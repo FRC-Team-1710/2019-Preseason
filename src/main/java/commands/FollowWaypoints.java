@@ -107,14 +107,14 @@ public class FollowWaypoints extends Command {
     				distanceCovered += currentPos;
     				updateGoalPos = true;
     				i++;
-    				System.out.println("made it to point: " + i);
+    				//System.out.println("made it to point: " + i);
     			} else {
     				Drive.straightDriveTele(0, goalHeading, _inHighGear);
     			}
     		} else {
     			Drive.straightDriveTele(output, goalHeading, _inHighGear);
     		}
-    		System.out.println("Current: " + currentPos + " goal pos: " + goalPos + " output: " + output + " goal heading: " + goalHeading + " current heading: " + Drive.getNavxAngle() + " index " + i);
+    		//System.out.println("Current: " + currentPos + " goal pos: " + goalPos + " output: " + output + " goal heading: " + goalHeading + " current heading: " + Drive.getNavxAngle() + " index " + i);
     
     	} catch(ArrayIndexOutOfBoundsException e) {
     		allDone = true;
@@ -126,7 +126,7 @@ public class FollowWaypoints extends Command {
     }
 
     protected void end() {
-    	System.out.println("all done!");
+    	//System.out.println("all done!");
     	Drive.stopDriving();
     }
 

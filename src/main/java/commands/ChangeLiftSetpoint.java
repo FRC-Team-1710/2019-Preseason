@@ -28,7 +28,7 @@ public class ChangeLiftSetpoint extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Starting at: " + lift.getLiftEncPosition() + " and going to: " + _setpoint);
+    	//System.out.println("Starting at: " + lift.getLiftEncPosition() + " and going to: " + _setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run

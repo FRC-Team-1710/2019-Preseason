@@ -45,7 +45,7 @@ public class TurnToAngle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Done Turning " + RobotMap.navx.getAngle());
+    	//System.out.println("Done Turning " + RobotMap.navx.getAngle());
     	Drive.stopDriving();
     }
 

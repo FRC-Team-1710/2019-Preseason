@@ -31,7 +31,7 @@ public class TrackCube extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(count < Constants.autoTrackTimeout) {
-    		System.out.println("tracking");
+    		//System.out.println("tracking");
     		if(_isSeekingLeft == true) {
     			Vision.cubeTrackLeft();
     		} else {
@@ -58,7 +58,7 @@ public class TrackCube extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Cube collected");
+    	//System.out.println("Cube collected");
     	count = 0;
     	Intake.intake(0, 0);
     	Drive.stopDriving();

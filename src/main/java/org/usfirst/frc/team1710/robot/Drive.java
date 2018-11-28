@@ -103,23 +103,24 @@ public class Drive {
 		return getMetersPerSecToFtPerSec(RobotMap.navx.getVelocityY());
 	}
 	public static void arcadeDrive (double side, double forward, boolean shift) {
-		if (shift == true) {
-			if(navxReset == false) {
-				RobotMap.navx.reset();
-				navxReset = true;
-			}
-			//high gear
-			setShifters(true);
-			//side is forward for some reason
-			RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
-			RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
-		} else {
-			RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
-			RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
-			//low gear
-			setShifters(false);
-			navxReset = false;
-		}
+		// if (shift == true) {
+		// 	if(navxReset == false) {
+		// 		RobotMap.navx.reset();
+		// 		navxReset = true;
+		// 	}
+		// 	//high gear
+		// 	setShifters(true);
+		// 	//side is forward for some reason
+		// 	RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
+		// 	RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
+		// } else {
+		// 	RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
+		// 	RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
+		// 	//low gear
+		// 	setShifters(false);
+		// 	navxReset = false;
+		// }
+		slowing();
 		
 	}
 	
@@ -220,23 +221,28 @@ public class Drive {
 
 	public static void autoShift(double leftVelocity, double shiftLowThreshold, double shiftHighThreshold) {
 	}
+	
 	public static void slowing() {
 		double oldVelocity= RobotMap.R1.getMotorOutputPercent();
-		double targetVelocity= ControllerMap.getForwardPower();
-		double rateOfChange = .005;
+		double targetVelocity= -1* ControllerMap.getForwardPower();
+		double rateOfChange = .05;
 		double newVelocityAdd = (rateOfChange + oldVelocity);
 		double newVelocitySub = (rateOfChange - oldVelocity);
+		//System.out.println(targetVelocity);
 
 		if (targetVelocity - rateOfChange < oldVelocity && oldVelocity < targetVelocity + rateOfChange) {
 			RobotMap.R1.set(ControlMode.PercentOutput, targetVelocity);
 			RobotMap.L1.set(ControlMode.PercentOutput, targetVelocity);
+			System.out.println( targetVelocity + "block 1");
 		} else if (oldVelocity> targetVelocity) {
 			RobotMap.R1.set(ControlMode.PercentOutput, newVelocitySub);
 			RobotMap.L1.set(ControlMode.PercentOutput, newVelocitySub);
+			System.out.println(newVelocityAdd+ "block 2");
 		} else if (oldVelocity< targetVelocity) {
 			RobotMap.R1.set(ControlMode.PercentOutput, newVelocityAdd);
 			RobotMap.L1.set(ControlMode.PercentOutput, newVelocityAdd);
+			System.out.println(newVelocityAdd + "block 3");
 		} 
-	
 	}
+
 }

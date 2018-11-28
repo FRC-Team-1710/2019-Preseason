@@ -44,7 +44,7 @@ public class FollowTrajectory extends Command {
     }
 
     protected void initialize() {
-    	System.out.println("starting path");
+    	//System.out.println("starting path");
     	SubsystemManager.masterReset();
     	Drive.setBrakeMode();
     	RobotMap.navx.reset();
@@ -100,7 +100,7 @@ public class FollowTrajectory extends Command {
 		}
 
     	
-    	//System.out.println("Left " + (turn + l) + " Right " + (turn -r) + " turn " + turn);
+    	////System.out.println("Left " + (turn + l) + " Right " + (turn -r) + " turn " + turn);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -110,7 +110,7 @@ public class FollowTrajectory extends Command {
 
     protected void end() {
     	Drive.stopDriving();
-    	System.out.println("Path Complete " + RobotMap.navx.getAngle());
+    	//System.out.println("Path Complete " + RobotMap.navx.getAngle());
     	left.reset();
     	right.reset();
     	Drive.setShifters(false);
@@ -119,7 +119,7 @@ public class FollowTrajectory extends Command {
 
     protected void interrupted() {
     	Drive.stopDriving();
-    	System.out.println("Path Interrupted");
+    	//System.out.println("Path Interrupted");
     	left.reset();
     	right.reset();
     	RobotMap.navx.reset();

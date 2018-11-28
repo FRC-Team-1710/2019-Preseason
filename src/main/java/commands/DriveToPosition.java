@@ -65,8 +65,8 @@ public class DriveToPosition extends Command {
     	}
     	_goalDist = Math.abs(_encGoal);
     	driveTime.start();
-		System.out.println("Start pos: " + _startingPosition);
-		System.out.println("Goal pos: " + _totalTicks);
+		//System.out.println("Start pos: " + _startingPosition);
+		//System.out.println("Goal pos: " + _totalTicks);
     }
 
 
@@ -153,7 +153,7 @@ public class DriveToPosition extends Command {
 		lift.override = false;
     	driveTime.stop();
 
-		System.out.println("End pos: " + _currentTicks);
+		//System.out.println("End pos: " + _currentTicks);
     	Drive.stopDriving();
     }
 

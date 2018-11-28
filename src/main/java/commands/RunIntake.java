@@ -84,7 +84,7 @@ public class RunIntake extends Command {
 		Vision.ledEntry.forceSetNumber(0);
 		Vision.ledEntry.forceSetNumber(1);
 		if(_didCubeStartInIntake == false) {
-			System.out.println("cube in: " + Intake.isCubeInIntake() + " ultra: " + Intake.getUltraSonic() + " count: " + count);
+			//System.out.println("cube in: " + Intake.isCubeInIntake() + " ultra: " + Intake.getUltraSonic() + " count: " + count);
 		}
     }
 

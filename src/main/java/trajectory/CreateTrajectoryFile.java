@@ -36,7 +36,7 @@ public class CreateTrajectoryFile extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("creating path");
+    	//System.out.println("creating path");
     	SubsystemManager.masterReset();
     	Drive.setBrakeMode();
     	RobotMap.navx.reset();
@@ -84,7 +84,7 @@ public class CreateTrajectoryFile extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("path created");
+    	//System.out.println("path created");
     }
 
     // Called when another command which requires one or more of the same

@@ -78,7 +78,7 @@ public class FollowTrajectoryFromFile extends Command {
 		}
 
     	
-    	//System.out.println("Left " + (turn + l) + " Right " + (turn -r) + " turn " + turn);
+    	////System.out.println("Left " + (turn + l) + " Right " + (turn -r) + " turn " + turn);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -88,7 +88,7 @@ public class FollowTrajectoryFromFile extends Command {
 
     protected void end() {
     	Drive.stopDriving();
-    	System.out.println("Path Complete " + RobotMap.navx.getAngle());
+    	//System.out.println("Path Complete " + RobotMap.navx.getAngle());
     	left.reset();
     	right.reset();
     	Drive.setShifters(false);
@@ -97,7 +97,7 @@ public class FollowTrajectoryFromFile extends Command {
 
     protected void interrupted() {
     	Drive.stopDriving();
-    	System.out.println("Path Interrupted");
+    	//System.out.println("Path Interrupted");
     	left.reset();
     	right.reset();
     	RobotMap.navx.reset();

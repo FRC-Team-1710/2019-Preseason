@@ -80,7 +80,7 @@ public class RunMotor extends Command {
     		((VictorSPX)_motor).set(ControlMode.PercentOutput,0);
     	}
     	
-    	System.out.println("Motor " + _motorName + "'s max current was: " + maxCurrent + " and " + _motorName + "'s min current was: " + minCurrent);
+    	//System.out.println("Motor " + _motorName + "'s max current was: " + maxCurrent + " and " + _motorName + "'s min current was: " + minCurrent);
     	
     }
 
