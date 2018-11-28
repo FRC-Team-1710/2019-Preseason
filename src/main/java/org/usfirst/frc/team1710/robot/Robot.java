@@ -125,6 +125,8 @@ public class Robot extends IterativeRobot {
 		Vision.ledEntry.forceSetNumber(1);
 		RobotMap.compressor.setClosedLoopControl(false);
 		Intake.setWristSetpoint(Constants.wristUp);
+		//SmoothDriving test code 
+		Drive.Approach(0, RobotMap.R1.getOutputCurrent(), .05);
 	}
 	
 	@Override

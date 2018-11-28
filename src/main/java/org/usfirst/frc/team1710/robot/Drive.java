@@ -22,7 +22,7 @@ public class Drive {
 	static boolean navxReset = false;
 	static double setPoint;
 	static double lastAngle, angleIntegral, output;
-	public static double dDt;
+	public static double dRateOfChange;
 	public static double dGoal;
 	public static double dCurrent;
 
@@ -96,18 +96,18 @@ public class Drive {
 		}
 	}*/
 
-	public static double Approach(double goal, double current, double dt){
-		 dDt = dt;
+	public static double Approach(double goal, double current, double RateOfChange){
+		 dRateOfChange = RateOfChange;
 		dGoal = goal;
 		dCurrent = current;
 		double difference = goal - current;
 
-		if(difference > dt){
-			return current + dt;
+		if(difference > RateOfChange){
+			return current + RateOfChange;
 		}
-		else if(difference < -dt){
-			return current - dt;
-		}		
+		else if(difference < - RateOfChange){
+			return current - RateOfChange;
+		} 
 		else{
 			return current;
 		}
@@ -130,15 +130,17 @@ public class Drive {
 				RobotMap.navx.reset();
 				navxReset = true;
 			}
-			//high gear
+			//high gear (added approach for smooth driving)
 			setShifters(true);
 			//side is forward for some reason
 			RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
 			RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
+			Approach(dGoal, dCurrent, dRateOfChange);
 		} else {
 			RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
 			RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
-			//low gear
+			Approach(dGoal, dCurrent, dRateOfChange);
+			//low gear ( added approach for smooth driving)
 			setShifters(false);
 			navxReset = false;
 		}
