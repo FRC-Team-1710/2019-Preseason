@@ -26,15 +26,20 @@ public class Vision2 {
 	static NetworkTableEntry txEntry = tableTwo.getEntry("tx");
 	static NetworkTableEntry tyEntry = tableTwo.getEntry("ty");
 	static NetworkTableEntry tvEntry = tableTwo.getEntry("tv");
-	if (Controllermap.altvision()==true){
-		if (txValue<=1) {
+	
+	if (ControllerMap.altvision() == true ) {
+		if (tvEntry > 1) {
 			Drive.arcadeDrive(0, -.4, false);
+		} else {
+			Drive.arcadeDrive(0,0, false);
 		}
-	}
-	/**
-	 * Initializing tje table so it can be used in the rest of the cube
-	 * creates a tabletwo than gets a table the limelight web interface gives
-	 * grabs the LED's from the limelight table and gets the on and off values  0 = on, 1 = off
+	} else {
+		Drive.arcadeDrive(0,0, false);
+	}		
+	/*
+	  Initializing tje table so it can be used in the rest of the cube
+	  creates a tabletwo than gets a table the limelight web interface gives
+	  grabs the LED's from the limelight table and gets the on and off values  0 = on, 1 = off
 	 */
 	public static void initializeVision() {
 		table = NetworkTableInstance.getDefault();

@@ -88,7 +88,7 @@ public class Drive {
 		
 			velocityL = getLeftVelocity(); 
 		lowThreshold = Constants.shiftLowThreshold; //gets threshold in constants
-	 	highThreshold = Constants.shiftHighThreshold; //gets threshold in constants
+	 	//highThreshold = Constants.shiftHighThreshold; //gets threshold in constants
 		
 	 	if(getLeftVelocity() > highThreshold) {
 	 		setShifters(true);

@@ -19,10 +19,10 @@ public class Constants {
 	//idk, run robot in auto at 60% output and look at the velocity
 	public static double liftingNotSafeVelocity = 1600;
 	//these are the thresholds of when to shift to high and when to shift to low
-	public static double getAvHighThreshold() { //you could press a button and it averages numbers ONCE
-		double highThresholdAv[] = new double[]{};
-		printArray(highThresholdAv);
-	} 
+	// public static double getAvHighThreshold() { //you could press a button and it averages numbers ONCE
+	// 	double highThresholdAv[] = new double[]{};
+	// 	printArray(highThresholdAv);
+	// } 
 	//=1400;
 	public static double shiftLowThreshold = 75;
 	
