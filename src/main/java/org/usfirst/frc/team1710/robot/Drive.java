@@ -22,9 +22,13 @@ public class Drive {
 	static boolean navxReset = false;
 	static double setPoint;
 	static double lastAngle, angleIntegral, output;
-	public static double dRateOfChange;
-	public static double dGoal;
-	public static double dCurrent;
+
+	// Cyrus: Here I initalize the constant rate of change we want to use;
+	public static final double dRateOfChange = 0.05;
+
+	// Cyrus: I removed goal values since it will be coming in as a parameter (see 'Approach' method)
+	// Cyrus: I updated current values for x (left-right) and y (forward-backward)
+	public static double dCurrentX, dCurrentY;
 
 	public static void initializeDrive () {
 		RobotMap.R1 = new TalonSRX (Constants.rightLeaderid);
@@ -96,22 +100,58 @@ public class Drive {
 		}
 	}*/
 
-	public static double Approach(double goal, double current, double RateOfChange){
-		 dRateOfChange = RateOfChange;
-		dGoal = goal;
-		dCurrent = current;
-		double difference = goal - current;
+	/**
+	 * Cyrus: I changed the parameters to be our goal values.
+	 * Since the current values are stored in the class, we don't need to be passing them in as parameters.
+	 * We also don't return any values, we'll set the motor values directly after calculating.
+	 */
+	public static void Approach(double goalX, double goalY){
+		// Cyrus: since we have both a forward-backwards and left-right to care about we need to calculate two differences
+		double differenceX = goalX - dCurrentX;
+		double differenceY = goalY - dCurrentY;
 
-		if(difference > RateOfChange){
-			return current + RateOfChange;
+		/**
+		 * Cyrus: So for both X(left-right) and Y(forward-directions) directions I determine 
+		 * if I need to add or subtract the rate of change constant. 
+		 */
+
+		// Cyrus: This figures out if our x is greater than or less than our goal.
+		if (differenceX <= dRateOfChange) { 
+			/**
+			 * If our difference is less than our rate of change value
+			 * We are close enough to the goal, so do nothing we should not add our subtract
+			 * our rate of change constant
+			 */
+		} else if (differenceX > 0) {
+			/**
+			 * Else If our difference positive
+			 * Our goal is greater than our current value
+			 * So we want to ADD our rate of change constant to get it closer to our goal
+			 */
+			dCurrentX += dRateOfChange;
+		} else {
+			/**
+			 * Else our difference negative
+			 * Our goal is less than our current value
+			 * So want to SUBTRACT our rate of change constant to get it closer to our goal
+			 */
+			dCurrentX -= dRateOfChange;
 		}
-		else if(difference < - RateOfChange){
-			return current - RateOfChange;
-		} 
-		else{
-			return current;
+
+		// Cyrus: The same is for the Y (forward-backward) direction
+		if (differenceY <= dRateOfChange) { 
+			// Do nothing
+		} else if (differenceY > 0) {
+			dCurrentY += dRateOfChange; // dGoal > dCurrent - So add rate of change constant
+		} else {
+			dCurrentY -= dRateOfChange; // dGoal < dCurrent - So subtract rate of change constant
 		}
+
+		// Cyrus: Finally we'll set our current values to the motor output.
+		RobotMap.R1.set(ControlMode.PercentOutput, dCurrentX - dCurrentY);
+		RobotMap.L1.set(ControlMode.PercentOutput, dCurrentX + dCurrentY);
 	}
+
 	public static double getMetersPerSecToFtPerSec(double meters){
 		return ftPerSec(meters)/60;
 	}
@@ -133,13 +173,15 @@ public class Drive {
 			//high gear (added approach for smooth driving)
 			setShifters(true);
 			//side is forward for some reason
-			RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
-			RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
-			Approach(dGoal, dCurrent, dRateOfChange);
+			// Cyrus: I commented these out since we'll set them in our 'Approach' method
+			// RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
+			// RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
+			Approach(side, forward);
 		} else {
-			RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
-			RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
-			Approach(dGoal, dCurrent, dRateOfChange);
+			// Cyrus: I commented these out since we'll set them in our 'Approach' method
+			// RobotMap.R1.set(ControlMode.PercentOutput, side - forward);
+			// RobotMap.L1.set(ControlMode.PercentOutput, side + forward);
+			Approach(side, forward);
 			//low gear ( added approach for smooth driving)
 			setShifters(false);
 			navxReset = false;
