@@ -44,6 +44,7 @@ public class Drive {
 		RobotMap.R2.setInverted(false);
 		RobotMap.L3.setInverted(false);
 		
+		
 		RobotMap.shifter = new DoubleSolenoid(Constants.shifterForward,Constants.shifterReverse);
 		
 		RobotMap.navx = new AHRS(SPI.Port.kMXP);
@@ -64,7 +65,7 @@ public class Drive {
         return inches / (Constants.wheelDiameter* Math.PI);
     }
 	private static double inchesPerSecondToRpm(double inches_per_second) {
-        return inchesToRotations(inches_per_second) * 60;
+	  return inchesToRotations(inches_per_second) * 60;
     }
 
     public double getRightDistanceInches() {
@@ -74,7 +75,7 @@ public class Drive {
     public double getLeftDistanceInches() {
         return rotationsToInches(RobotMap.L1.getSelectedSensorPosition(6));
     }
-	/*public static double rpmToInchesPerSecond(double rpm) {
+	public static double rpmToInchesPerSecond(double rpm) {
 		return rotationsToInches(rpm) / 60;
 	}
 	public static double getRightVelocity1() {
@@ -85,16 +86,17 @@ public class Drive {
 	}
 	public static void autoShift(double velocityL, double lowThreshold, double highThreshold) {
 		
-		velocityL = getLeftVelocity(); 
-		lowThreshold = Constants.shiftLowThreshold;
-		highThreshold = Constants.shiftHighThreshold;
+			velocityL = getLeftVelocity(); 
+		lowThreshold = Constants.shiftLowThreshold; //gets threshold in constants
+	 	highThreshold = Constants.shiftHighThreshold; //gets threshold in constants
 		
-		if(getLeftVelocity() > highThreshold) {
-			setShifters(true);
-		}else if( getLeftVelocity() < lowThreshold) {
-			setShifters(false);
-		}
-	}*/
+	 	if(getLeftVelocity() > highThreshold) {
+	 		setShifters(true);
+	 	}else if(getLeftVelocity() < lowThreshold) {
+	 		setShifters(false);
+	 	}
+	}
+	
 
 	public static double Approach(double goal, double current, double dt){
 		 dDt = dt;
@@ -111,18 +113,6 @@ public class Drive {
 		else{
 			return current;
 		}
-	}
-	public static double getMetersPerSecToFtPerSec(double meters){
-		return ftPerSec(meters)/60;
-	}
-	private static double ftPerSec(double meters) {
-		return 0;
-	}
-	public static double getLRVelocity(){ //get Left Right Velocity
-		return getMetersPerSecToFtPerSec(RobotMap.navx.getVelocityX());
-	}
-	public static double getFBVelocity(){ //get forward backward velocity
-		return getMetersPerSecToFtPerSec(RobotMap.navx.getVelocityY());
 	}
 	public static void arcadeDrive (double side, double forward, boolean shift) {
 		if (shift == true) {
@@ -240,7 +230,7 @@ public class Drive {
 		RobotMap.L1.setNeutralMode(NeutralMode.Coast);		
 	}
 
-	public static void autoShift(double leftVelocity, double shiftLowThreshold, double shiftHighThreshold) {
-	}
+	//public static void autoShift(double leftVelocity, double shiftLowThreshold, double shiftHighThreshold) why is this boi here? {
+	//}
 	
 }

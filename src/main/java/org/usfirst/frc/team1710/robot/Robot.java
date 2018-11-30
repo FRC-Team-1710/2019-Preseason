@@ -187,8 +187,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Robot Heading", Drive.getNavxAngle());
 		SmartDashboard.putNumber("Controller Pov", RobotMap.driveStick.getPOV());
 		SmartDashboard.putBoolean("Cube in", Intake.isCubeInIntake());
-		SmartDashboard.putNumber("Robot Velocity", Drive.getFBVelocity());
-		SmartDashboard.putNumber("Robot Velocity", Drive.getLRVelocity());
 		Drive.autoShift(Drive.getLeftVelocity(), Constants.shiftLowThreshold, Constants.shiftHighThreshold);
 
 		if(lift.isAtBottom() == true) {

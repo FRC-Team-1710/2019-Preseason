@@ -88,5 +88,9 @@ public class ControllerMap {
 	public static double intakeL() {
 		return RobotMap.driveStick.getRawAxis(3);
 	}
+
+	public static boolean altvision(){
+		return RobotMap.driveStick.getRawButton(8);
+	}
 }
 
